@@ -1,0 +1,15 @@
+
+.clickable-text {
+    color: var(--primary-color);
+    transition: color 0.3s;
+    font-family: Arial, sans-serif;
+    font-size: 12px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 0;
+}
+    
+.clickable-text:hover {
+    filter: var(--hover-color);
+}

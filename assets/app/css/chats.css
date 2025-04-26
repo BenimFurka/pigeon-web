@@ -1,0 +1,54 @@
+.search-result, .chat-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    cursor: pointer;
+    background: var(--bg-glass);
+    border-radius: 8px;
+    opacity: 0.85;
+    margin: 5px;
+    transition: var(--transition), transform 0.3s;
+    
+}
+    
+.search-result:hover, .chat-item:hover {
+    transform: scale(1.02) translateY(-2px);
+    opacity: 1.0;
+}
+
+.search-result:active, .chat-item:active {
+    transform: scale(1.00);
+    opacity: 1.0;
+}
+    
+.chat-info {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+    
+.last-message {
+    color: var(--text-color);
+    opacity: 0.7;
+    font-size: 0.8em;
+}
+
+.status-indicator {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    display: flex;
+    align-self: flex-end;
+    justify-content: center;
+    margin: 0 auto 15px;
+    transition: var(--transition);
+}
+
+.status-online {
+    background-color: var(--primary-color);
+}
+
+.status-offline {
+    background-color: var(--hover-color);
+}

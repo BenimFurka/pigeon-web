@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pigeon</title>
+    <link rel="stylesheet" href="/assets/app/css/main.css">
+</head>
+<body>
+    <div class="left_layout_container" id="leftLayout">
+        <div class="bar">
+            <input id="search_bar" type="text" class="search_bar" placeholder="Поиск...">
+        </div>
+        
+        <div class="chat_list" id="chats">
+        </div>
+        
+        <div class="button_container">
+            <button id="buttonToSettings" class="button right-border left-border width-100" style="--button-width: 100%">Настройки</button>
+        </div>
+    </div>
+
+    <div class="right_layout_container">
+        <div class="bar" id="chat-bar">
+            Название чата
+        </div>
+        
+        <div class="messages_list" id="messages-list">
+        </div>
+        
+        <div class="input_container">
+            <textarea id="sendText" placeholder="Введите сообщение..."></textarea>
+            <button id="sendButton" class="button left-border" style="--button-width: 25%">Отправить</button>
+        </div>
+    </div>
+    <div class="left_layout_container settings" id="settingsLayout">
+        <div class="left_layout">
+            <div class="bar">
+                Настройки
+                <br>
+            </div>
+            
+            <div class="messages_list" id="settingsList">
+                
+                <button onclick="toggleTheme()", class="clickable-text" id="changeThemeButton">Сменить тему вроде</button>
+                <br>
+                Hue: <span id="hue-value">235</span>°
+                <div class="slider-container">
+                    <input type="range" id="hue-slider" min="0" max="360" value="235" oninput="adjustHue()">
+                </div>
+            </div>
+            <div class="button_container">
+                <button class="button left-border right-border" style="--button-width: 100%" id="backButton" onclick="">Назад</button>   
+            </div>
+        </div>
+    </div>
+        
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    
+    <script src="/assets/app/js/utils/create_message.js"></script>
+    <script src="/assets/app/js/utils/markdown.js"></script>
+    <script src="/assets/app/js/utils/themes.js"></script>
+
+
+
+    <script src="/assets/app/js/auth/auth.js"></script>
+    <script src="/assets/app/js/auth/profile.js"></script>
+    <script src="/assets/app/js/auth/ws.js"></script>
+
+    <script src="/assets/app/js/search.js"></script>
+    <script src="/assets/app/js/chats.js"></script>
+    <script src="/assets/app/js/messages.js"></script>
+    <script src="/assets/app/js/send_message.js"></script>
+    <script src="/assets/app/js/infinite_scroll.js"></script>
+
+
+    <script src="/assets/app/js/websocket/new_message.js"></script>
+    <script src="/assets/app/js/websocket/online_status.js"></script>
+    <script src="/assets/app/js/websocket/online_list.js"></script>
+
+    <script src="/assets/app/js/textarea.js"></script>
+    <script src="/assets/app/js/avatar.js"></script>
+    <script src="/assets/app/js/settings.js"></script>
+    <script src="/assets/app/js/theme.js"></script>
+    
+    <script>
+    document.addEventListener('DOMContentLoaded', async () => {
+        refreshTokens();
+        checkAuth();
+
+
+        await initSettings();
+        await initSearch();
+
+        await loadChats();
+
+        await connect()
+
+        loadHue();
+        loadTheme();
+    });
+    </script>
+    
+</body>
+</html>

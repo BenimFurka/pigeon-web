@@ -1,0 +1,49 @@
+.chat_list, .messages_list, .settings_list {
+    flex: 1 1 0%;
+    min-height: 0; 
+    overflow-y: auto;
+    margin: 10px;
+    color: var(--text-color);
+}
+
+.messages_list {
+    padding: 10px;
+}
+.bar {
+    display: flex;
+    position: relative;
+    transition: var(--transition);
+    background-color: var(--primary-color);
+    color: #E0E0E0;
+    height: 60px;
+    margin: 0px;
+    flex-shrink: 0;
+    padding: 10px;
+}
+
+.mobileBar {
+    display: flex;    
+    position: relative;
+    transition: var(--transition);
+    background-color: var(--primary-color);
+    color: #E0E0E0;
+    height: 60px;
+    margin: 0;
+    padding: 10px;
+    align-items: center;
+    justify-content: space-between; 
+}
+
+.mobileBar > * {
+    margin: 0 10px; 
+}
+
+
+.button_container {
+    flex-shrink: 0;
+    display: flex;
+    width: 100%;
+    margin: 0px;
+    transition: var(--transition);
+    background-color: var(--primary-color);
+}

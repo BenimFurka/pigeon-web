@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pigeon</title>
+    <link rel="stylesheet" href="/assets/app/css/main.css">
+</head>
+<body>
+    <!-- Мобильная версия - только список чатов -->
+    <div class="mobile_left_layout_container" id="leftLayout">
+        <div class="mobileBar">
+            <button id="buttonToSettings" class="clickable-text">⚙️</button>
+            <h2>Pigeon</h2>
+            <input id="search_bar" type="text" class="search_bar" placeholder="Поиск...">
+        </div>
+        
+        <div class="search_container">
+        </div>
+        
+        <div class="chat_list" id="chats">
+            <!-- Список чатов будет загружаться здесь -->
+        </div>
+    </div>
+
+    <div class="mobile_left_layout_container settings hidden" id="settingsLayout">
+        <div class="left_layout">
+            <div class="mobileBar">
+                Настройки
+                <br>
+            </div>
+            
+            <div class="messages_list" id="settingsList">
+                
+                <button onclick="toggleTheme()", class="clickable-text" id="changeThemeButton">Сменить тему вроде</button>
+                <br>
+                Hue: <span id="hue-value">235</span>°
+                <div class="slider-container">
+                    <input type="range" id="hue-slider" min="0" max="360" value="235" oninput="adjustHue()">
+                </div>
+                <!-- Здесь будут сообщения в будущем, буду через скрипт добавлять -->
+            </div>
+            <div class="button_container">
+                <button class="button left-border right-border" style="--button-width: 100%" id="backButton" onclick="">Назад</button>   
+            </div>
+        </div>
+    </div>
+
+    <div class="mobile_right_layout_container">
+        <div class="mobileBar" id="chat-bar">
+            Название чата
+        </div>
+        
+        <div class="messages_list" id="messages-list">
+            <!-- Сообщения -->
+        </div>
+        
+        <div class="input_container">
+            <textarea id="sendText" placeholder="Введите сообщение..."></textarea>
+            <button id="sendButton" class="button left-border" style="--button-width: 25%">Отправить</button>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    
+    <script src="/assets/app/js/utils/create_message.js"></script>
+    <script src="/assets/app/js/utils/markdown.js"></script>
+    <script src="/assets/app/js/utils/themes.js"></script>
+
+    <script src="/assets/app/js/backend/websocket/new_message.js"></script>
+    <script src="/assets/app/js/backend/websocket/online_status.js"></script>
+    <script src="/assets/app/js/backend/websocket/online_list.js"></script>
+
+    <script src="/assets/app/js/backend/auth/auth.js"></script>
+    <script src="/assets/app/js/backend/auth/profile.js"></script>
+    <script src="/assets/app/js/backend/auth/ws.js"></script>
+
+    <script src="/assets/app/js/backend/search.js"></script>
+    <script src="/assets/app/js/backend/chats.js"></script>
+    <script src="/assets/app/js/backend/messages.js"></script>
+    <script src="/assets/app/js/backend/send_message.js"></script>
+    <script src="/assets/app/js/backend/infinite_scroll.js"></script>
+
+    <script src="/assets/app/js/textarea.js"></script>
+    <script src="/assets/app/js/avatar.js"></script>
+    <script src="/assets/app/js/settings.js"></script>
+    <script src="/assets/app/js/theme.js"></script>
+    
+    <script>
+    document.addEventListener('DOMContentLoaded', async () => {
+        refreshTokens();
+        checkAuth();
+
+        await connect()
+        await mobileInitSettings();
+        await initSearch();
+        await loadChats();
+
+        loadHue();
+        loadTheme();
+    });
+    </script>
+</body>
+</html>
