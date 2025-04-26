@@ -20,6 +20,7 @@ Pigeon Web — **открытый фронтенд**, и ты можешь:
 *Бэкенд (Pigeon Server) закрыт, но клиент можно дорабатывать независимо.*  
 
 **Лицензия**: [![MIT License](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
+
 **Статус**: ![Статус](https://img.shields.io/badge/status-active-brightgreen)
 
 | Скриншот чата | Настройки |  
