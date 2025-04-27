@@ -13,9 +13,8 @@ async function loadMessages(chatId) {
         messagesContainer.innerHTML = `
             <div class="no-chat">
                 <p>Чат не существует</p>
-                <button class="button" onclick="createDM(${chatId})">Создать чат</button>
-            </div>`
-        ;
+                <p>Начните общение, отправив сообщение</p>
+            </div>`;
         return;
     }
 
@@ -35,7 +34,6 @@ async function loadMessages(chatId) {
         });
     });
     
-
     messagesContainer.scrollTop = messagesContainer.scrollHeight;
     setupInfiniteScroll();
 }
@@ -70,18 +68,15 @@ async function createDM(targetId) {
         if (!currentChats) currentChats = [];
         currentChats.unshift(newChat);
         
-        const chatElement = displayChats([newChat])[0];
-        chatsList.insertBefore(chatElement, chatsList.firstChild);
+        displayChats(currentChats);
         
-        loadMessages(data.chat_id);
-        
+        loadMessages(data.chat_id, false);
         
     } catch (error) {
         console.error('Ошибка при создании DM:', error);
+        return null;
     }
 }
-
-
 const chatBar = document.getElementById("chat-bar");
 document.addEventListener('click', (e) => {
     const chatItem = e.target.closest('.chat-item');
