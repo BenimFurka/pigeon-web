@@ -1,13 +1,10 @@
-.chat_list, .messages_list, .settings_list {
+.list {
     flex: 1 1 0%;
     min-height: 0; 
     overflow-y: auto;
     margin: 10px;
     color: var(--text-color);
-}
-
-.messages_list {
-    padding: 10px;
+    padding: 5px;
 }
 
 .bar {
@@ -16,7 +13,7 @@
     transition: var(--transition);
     background-color: var(--primary-color);
     color: #E0E0E0;
-    height: 60px;
+    height: 45px;
     margin: 0;
     padding: 10px;
     align-items: center;

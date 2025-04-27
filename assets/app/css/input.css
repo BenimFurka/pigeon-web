@@ -1,10 +1,8 @@
 
 textarea {
-                    
     background-color: var(--secondary-color);
-    flex-grow: 1;
-    border: 1px solid var(--border-color);
-    border-radius: 6px;
+    border: 1px solid var(--primary-color);
+    border-radius: 8px;
     padding: 4px 8px;
     resize: none;
     height: 30px;
@@ -16,30 +14,15 @@ textarea {
     box-sizing: border-box;
     transition: var(--transition);
     color: var(--text-color);
-
-}
-
-.input_container {
-    display: flex;
-    margin: 0px;
-    width: 100%;
-    background-color: var(--primary-color);
-
-    transition: var(--transition);
-}
-
-.search_bar:focus, textarea:focus {
-    border-color: var(--primary-color);
-    box-shadow: 0 0 0 2px rgba(129, 135, 209, 0.2);
+    flex-grow: 1;
 }
 
 .search_bar {
-            
     background-color: var(--secondary-color);
-    border: 1px solid var(--border-color);
+    border: 1px solid var(--primary-color);
     position: relative;
     padding: 10px;
-    border-radius: 4px;
+    border-radius: 8px;
     width: 90%;
     height: 80%;
     justify-self: center;
@@ -47,6 +30,18 @@ textarea {
     color: var(--text-color);
     transition: var(--transition);
     margin: 0 auto; 
+}
+
+.input_container {
+    display: flex;
+    margin: 0px;
+    width: 100%;
+    background-color: var(--second-color);
+    transition: var(--transition);
+}
+
+.search_bar:focus, textarea:focus {
+    outline: none;
 }
 
 #sendButton {

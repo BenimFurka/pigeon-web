@@ -13,7 +13,7 @@
             <input id="search_bar" type="text" class="search_bar" placeholder="Поиск...">
         </div>
         
-        <div class="chat_list" id="chats">
+        <div class="list" id="chats">
         </div>
         
     </div>
@@ -23,12 +23,12 @@
             Название чата
         </div>
         
-        <div class="messages_list" id="messages-list">
+        <div class="list" id="messages-list">
         </div>
         
         <div class="input_container">
             <textarea id="sendText" placeholder="Введите сообщение..."></textarea>
-            <button id="sendButton" class="button left-border" style="--button-width: 25%">Отправить</button>
+            <button id="sendButton" class="button" style="--button-width: 30%">Отправить</button>
         </div>
     </div>
     <div class="left_layout_container settings" id="settingsLayout">
@@ -38,9 +38,9 @@
                 Настройки
             </div>
             
-            <div class="messages_list" id="settingsList">
+            <div class="list" id="settingsList">
                 
-                <button onclick="toggleTheme()", class="clickable-text" id="changeThemeButton">Сменить тему вроде</button>
+                <button onclick="toggleTheme()", class="clickable-text" id="changeThemeButton">Сменить тему</button>
                 <br>
                 Hue: <span id="hue-value">235</span>°
                 <div class="slider-container">
