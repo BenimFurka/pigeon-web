@@ -92,5 +92,12 @@ document.addEventListener('click', (e) => {
     if (!searchResult) return;
 
     const userId = searchResult.dataset.chatId;
-    loadMessages(userId)
+    const userName = searchResult.dataset.chatName;
+    
+    chatBar.innerHTML = userName;
+    loadMessages(userId);
+    
+    if (typeof clearSearch === 'function') {
+        clearSearch();
+    }
 });

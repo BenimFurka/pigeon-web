@@ -13,6 +13,19 @@ class User {
     }
 }
 
+function clearSearch() {
+    const searchBar = document.getElementById('search_bar');
+    const chatsList = document.getElementById('chats');
+    
+    searchBar.value = '';
+    
+    if (currentChats) {
+        displayChats(currentChats);
+    } else {
+        loadChats();
+    }
+}
+
 async function initSearch() {
     const searchBar = document.getElementById('search_bar');
     const chatsList = document.getElementById('chats');
