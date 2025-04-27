@@ -95,9 +95,11 @@ document.addEventListener('click', (e) => {
     const userName = searchResult.dataset.chatName;
     
     chatBar.innerHTML = userName;
-    loadMessages(userId);
-    
-    if (typeof clearSearch === 'function') {
-        clearSearch();
+    try {
+        loadMessages(userId);
+    } finally {
+        if (typeof clearSearch === 'function') {
+            clearSearch();
+        }
     }
 });
