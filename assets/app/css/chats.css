@@ -40,7 +40,6 @@
     font-size: 0.8em;
     white-space: nowrap;
     overflow: hidden;
-    text-overflow: ellipsis;
     width: 50%; 
     max-width: 100%;
     box-sizing: border-box;

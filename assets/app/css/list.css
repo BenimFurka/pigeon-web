@@ -9,19 +9,8 @@
 .messages_list {
     padding: 10px;
 }
-.bar {
-    display: flex;
-    position: relative;
-    transition: var(--transition);
-    background-color: var(--primary-color);
-    color: #E0E0E0;
-    height: 60px;
-    margin: 0px;
-    flex-shrink: 0;
-    padding: 10px;
-}
 
-.mobileBar {
+.bar {
     display: flex;    
     position: relative;
     transition: var(--transition);
@@ -34,10 +23,13 @@
     justify-content: space-between; 
 }
 
-.mobileBar > * {
+.bar > * {
     margin: 0 10px; 
 }
 
+.bar.no-center {
+    justify-content: flex-start; 
+}
 
 .button_container {
     flex-shrink: 0;

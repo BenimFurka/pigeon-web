@@ -9,15 +9,13 @@
 <body>
     <div class="left_layout_container" id="leftLayout">
         <div class="bar">
+            <button id="buttonToSettings" class="clickable-text">⚙️</button>
             <input id="search_bar" type="text" class="search_bar" placeholder="Поиск...">
         </div>
         
         <div class="chat_list" id="chats">
         </div>
         
-        <div class="button_container">
-            <button id="buttonToSettings" class="button right-border left-border width-100" style="--button-width: 100%">Настройки</button>
-        </div>
     </div>
 
     <div class="right_layout_container">
@@ -35,9 +33,9 @@
     </div>
     <div class="left_layout_container settings" id="settingsLayout">
         <div class="left_layout">
-            <div class="bar">
+            <div class="bar no-center">
+                <button id="backButton" class="clickable-text">⬅️</button>
                 Настройки
-                <br>
             </div>
             
             <div class="messages_list" id="settingsList">
@@ -48,9 +46,6 @@
                 <div class="slider-container">
                     <input type="range" id="hue-slider" min="0" max="360" value="235" oninput="adjustHue()">
                 </div>
-            </div>
-            <div class="button_container">
-                <button class="button left-border right-border" style="--button-width: 100%" id="backButton" onclick="">Назад</button>   
             </div>
         </div>
     </div>
