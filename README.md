@@ -23,8 +23,6 @@ Pigeon Web — **открытый фронтенд**, и ты можешь:
 
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](LICENSE)
 
-*См. также*: [человекочитаемое резюме](LICENSE.md) (не является юридическим документом)
-
 **Статус**: ![Статус](https://img.shields.io/badge/status-active-brightgreen)
 
 | Скриншот чата | Настройки |  
