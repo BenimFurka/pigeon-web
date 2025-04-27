@@ -19,9 +19,7 @@ Pigeon Web — **открытый фронтенд**, и ты можешь:
 
 *Бэкенд (Pigeon Server) закрыт, но клиент можно дорабатывать независимо.*  
 
-**Лицензия**: 
-
-[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](LICENSE)
+**Лицензия**: [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](LICENSE)
 
 **Статус**: ![Статус](https://img.shields.io/badge/status-active-brightgreen)
 
