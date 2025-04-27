@@ -17,7 +17,6 @@ function toggleChatStatus(chatId, isOnline) {
 }
 
 function displayChats(chats) {
-    console.log(chats);
     chatsList.innerHTML = '';
     return chats.map(chat => {
         const chatElement = document.createElement('div');
