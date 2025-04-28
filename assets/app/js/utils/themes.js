@@ -36,7 +36,6 @@ function updateCSSVariables(colors) {
             --secondary-color: ${colors.lightSecondary};
             --text-color: black;
             --hover-color: brightness(1.05);
-            --border-color: #ccc;
             --bg-glass: rgba(0, 0, 0, 0.05);
             --transition: color 0.3s, background-color 0.3s, border-color 0.3s, opacity 0.3s ease;
         }`
@@ -46,7 +45,6 @@ function updateCSSVariables(colors) {
         .dark-theme {
             --primary-color: ${colors.darkPrimary};
             --secondary-color: ${colors.darkSecondary};
-            --border-color: #282A36;
             --text-color: #E0E0E0;
             --hover-color: brightness(0.95);
             --bg-glass: rgba(255, 255, 255, 0.05);

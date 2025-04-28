@@ -9,7 +9,6 @@ body {
     margin: 0;
     color: var(--text-color);
     background-color: var(--secondary-color);
-    border-color: solid var(--border-color);
     position: relative; 
     overflow: hidden; 
     transition: var(--transition);

@@ -1,11 +1,16 @@
 const notificationSound = new Audio('/assets/sounds/notification.mp3');
 
 function handleNewMessage(messageData) {
+    const messagesContainer = document.getElementById('messages-list');
     const data = messageData.data;
     updateChatList(data);
 
     if (parseInt(currentChat) === data.chat_id) {
         addMessageToChat(data);
+        messagesContainer.scrollTo({
+            top: messagesContainer.scrollHeight,
+            behavior: 'smooth'
+        });
     } else {
         playNotification();
     }

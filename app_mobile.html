@@ -29,10 +29,8 @@
             </div>
             
             <div class="list" id="settingsList">
-                
-                <button onclick="toggleTheme()", class="clickable-text" id="changeThemeButton">Сменить тему вроде</button>
-                <br>
-                Hue: <span id="hue-value">235</span>°
+                <button onclick="toggleTheme()", class="clickable-text" id="changeThemeButton">Сменить тему</button>
+                <br>Hue: <span id="hue-value">235</span>°
                 <div class="slider-container">
                     <input type="range" id="hue-slider" min="0" max="360" value="235" oninput="adjustHue()">
                 </div>
@@ -50,7 +48,7 @@
         
         <div class="input_container">
             <textarea id="sendText" placeholder="Введите сообщение..."></textarea>
-            <button id="sendButton" class="button left-border" style="--button-width: 25%">Отправить</button>
+            <button id="sendButton" class="button" style="--button-width: 30%">Отправить</button>
         </div>
     </div>
 

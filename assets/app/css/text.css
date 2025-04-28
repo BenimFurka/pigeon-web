@@ -1,9 +1,9 @@
 
 .clickable-text {
     color: var(--primary-color);
-    transition: color 0.3s;
+    transition: var(--transition);
     font-family: Arial, sans-serif;
-    font-size: 12px;
+    font-size: 14px;
     cursor: pointer;
     background: none;
     border: none;
@@ -12,4 +12,10 @@
     
 .clickable-text:hover {
     filter: var(--hover-color);
+}
+
+
+#settingsList {
+    font-size: 14px;
+    color: var(--primary-color);
 }

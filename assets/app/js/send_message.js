@@ -54,13 +54,8 @@ async function sendMessage() {
         if (!response.ok) {
             throw new Error('Failed to send message');
         }
-        
-        await loadMessages(currentChat);
-        messagesContainer.scrollTop = messagesContainer.scrollHeight;
-        
     } catch (error) {
         sendText.value = content;
         console.error('Error sending message:', error);
-        showNotification('Не удалось отправить сообщение: ' + error.message, 'error');
     }
 }

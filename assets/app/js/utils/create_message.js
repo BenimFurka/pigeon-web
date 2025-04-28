@@ -60,9 +60,4 @@ function addMessageToChat(data) {
     
     messagesContainer.appendChild(messageElement);
     groupMessages();
-    
-    messagesContainer.scrollTo({
-        top: messagesContainer.scrollHeight,
-        behavior: 'smooth'
-    });
 }
