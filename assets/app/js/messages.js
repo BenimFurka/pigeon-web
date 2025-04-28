@@ -77,6 +77,7 @@ async function createDM(targetId) {
         return null;
     }
 }
+
 const chatBar = document.getElementById("chat-bar");
 document.addEventListener('click', (e) => {
     const chatItem = e.target.closest('.chat-item');

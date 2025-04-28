@@ -5,13 +5,11 @@ async function changeAvatar() {
     input.onchange = async (e) => {
         const file = e.target.files[0];
         const base64 = await toBase64(file);
-        const response = await fetch('/app/setAvatar', {
+        const response = await fetch('/app/setUAvatar', {
             method: 'POST',
             
             credentials: 'include',
             headers: {
-                
-                'Authorization': `Bearer ${localStorage.getItem('access_token')}`,
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({ image: base64.split(',')[1] })
@@ -20,10 +18,50 @@ async function changeAvatar() {
     };
     input.click();
 }
+async function getAvatar(avatar_url) {
+    const storageKey = `avatar_hash_${btoa(avatar_url)}`;
+    const cachedHash = localStorage.getItem(storageKey);
+    const cachedAvatar = localStorage.getItem(storageKey + '_data');
     
-const toBase64 = file => new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = () => resolve(reader.result);
-    reader.onerror = reject;
-});
+    let apiUrl = `/app/getAvatar/${avatar_url}`;
+    if (cachedHash) {
+        apiUrl += `?hash=${cachedHash}`;
+    }
+
+    console.log(apiUrl);
+    
+    try {
+        const response = await fetch(apiUrl);
+        
+        if (response.status === 304 && cachedAvatar) {
+            return cachedAvatar;
+        } else if (response.ok) {
+            const blob = await response.blob();
+            const dataUrl = await toBase64(blob);
+            
+            const newHash = response.headers.get('ETag') || response.headers.get('X-Hash');
+            
+            if (newHash) {
+                localStorage.setItem(storageKey, newHash);
+                localStorage.setItem(storageKey + '_data', dataUrl);
+            }
+            
+            return dataUrl;
+        } else {
+            console.error('Failed to fetch avatar:', response.status);
+            return cachedAvatar || null;
+        }
+    } catch (error) {
+        console.error('Error fetching avatar:', error);
+        return cachedAvatar || null;
+    }
+}
+
+function toBase64(blob) {
+    return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = reject;
+        reader.readAsDataURL(blob);
+    });
+}

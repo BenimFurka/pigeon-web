@@ -30,6 +30,7 @@ async function initSearch() {
     const searchBar = document.getElementById('search_bar');
     const chatsList = document.getElementById('chats');
 
+    
     searchBar.addEventListener('input', async (e) => {
         if (e.target.value.length < 2) {
             if (currentChats) {
