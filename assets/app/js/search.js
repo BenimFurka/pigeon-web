@@ -1,18 +1,5 @@
 // зачем этот комментарий. для красоты
 
-class User {
-    constructor(userId, username, displayName) {
-        this.id = userId;
-        this.username = username;
-        this.displayName = displayName;
-        this.avatar = null;
-    }
-
-    loadAvatar() {
-        this.avatar = `/app/getAvatar/${this.id}`;
-    }
-}
-
 function clearSearch() {
     const searchBar = document.getElementById('search_bar');
     const chatsList = document.getElementById('chats');
@@ -58,20 +45,31 @@ async function initSearch() {
 
             chatsList.innerHTML = '';
 
-            for (const userData of data.users) {
-                const user = new User(userData.user_id, userData.username, userData.display_name);
-                user.loadAvatar();
-                
+            for (const user of data.users) {
                 const userElement = document.createElement('div');
                 userElement.className = 'search-result';
-                userElement.dataset.chatId = user.id;
-                userElement.dataset.chatName = user.displayName;
+                userElement.dataset.chatId = user.user_id;
+                userElement.dataset.chatName = user.display_name;
+                userElement.dataset.avatar_url = user.avatar_url;
+                
                 userElement.innerHTML = `
-                <img src="${user.avatar}" class="avatar" style="width: 48px; height: 48px; border-radius: 10px">
-                <span class="display-name">${user.displayName}</span>
+                    <img src="" class="avatar" style="width: 48px; height: 48px; border-radius: 10px">
+                    <span class="display-name">${user.display_name}</span>
                 `;
                 
                 chatsList.appendChild(userElement);
+                
+                if (user.avatar_url) {
+                    (async () => {
+                        try {
+                            const avatarBase64 = await getAvatar(user.avatar_url);
+                            const img = userElement.querySelector('.avatar');
+                            img.src = avatarBase64; 
+                        } catch (error) {
+                            console.error('Ошибка загрузки аватара:', error);
+                        }
+                    })(); 
+                }
             }
         } catch (error) {
             console.error('Search error:', error);

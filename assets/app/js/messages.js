@@ -100,7 +100,8 @@ async function createDM(targetId) {
             id: data.chat_id,
             name: data.name,
             dm_user_id: targetId,
-            status: 'offline'
+            status: 'offline',
+            avatar_url: data.avatar_url
         };
 
         if (!currentChats) currentChats = [];
@@ -121,25 +122,44 @@ const chatBar = document.getElementById("chat-bar");
 document.addEventListener('click', (e) => {
     const chatItem = e.target.closest('.chat-item');
     if (!chatItem) return;
-    
+
+    if (window.location.pathname.split('/').pop() == 'app_mobile') {
+        const leftLayout = document.getElementById('leftLayout');
+        leftLayout.classList.add('hidden');
+    }
     chatBar.innerHTML = chatItem.dataset.chatName;
     const chatId = chatItem.dataset.chatId;
+
     loadMessages(chatId, false);
 });
 
 document.addEventListener('click', (e) => {
     const searchResult = e.target.closest('.search-result');
     if (!searchResult) return;
-
+    
+    if (window.location.pathname.split('/').pop() == 'app_mobile') {
+        const leftLayout = document.getElementById('leftLayout');
+        leftLayout.classList.add('hidden');
+    }
+    
     const userId = searchResult.dataset.chatId;
     const userName = searchResult.dataset.chatName;
     
     chatBar.innerHTML = userName;
     try {
-        loadMessages(userId);
+        loadMessages(userId, true);
     } finally {
         if (typeof clearSearch === 'function') {
             clearSearch();
         }
     }
 });
+
+if (window.location.pathname.split('/').pop() == 'app_mobile') {
+    const backRightButton = document.getElementById('backRightButton');
+
+    backRightButton.addEventListener('click', function() {
+        const leftLayout = document.getElementById('leftLayout');
+        leftLayout.classList.remove('hidden');
+    });
+}

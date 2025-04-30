@@ -29,6 +29,7 @@
             </div>
             
             <div class="list" id="settingsList">
+                <div id="profile"></div>
                 <button onclick="toggleTheme()", class="clickable-text" id="changeThemeButton">Сменить тему</button>
                 <br>Hue: <span id="hue-value">235</span>°
                 <div class="slider-container">
@@ -39,8 +40,9 @@
     </div>
 
     <div class="mobile_right_layout_container">
-        <div class="bar" id="chat-bar">
-            Название чата
+        <div class="bar no-center">
+            <button id="backRightButton" class="clickable-text">⬅️</button>
+            <span id="chat-bar">Название чата</span>
         </div>
         
         <div class="list" id="messages-list">

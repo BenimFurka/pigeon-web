@@ -18,10 +18,18 @@ async function changeAvatar() {
     };
     input.click();
 }
-async function getAvatar(avatar_url) {
+async function getAvatar(avatar_url, cacheMinutes = 5) {
     const storageKey = `avatar_hash_${btoa(avatar_url)}`;
     const cachedHash = localStorage.getItem(storageKey);
     const cachedAvatar = localStorage.getItem(storageKey + '_data');
+    const cacheTimestamp = localStorage.getItem(storageKey + '_time');
+    
+    const isCacheFresh = cacheTimestamp && 
+                        (Date.now() - parseInt(cacheTimestamp)) < cacheMinutes * 60 * 1000;
+    
+    if (isCacheFresh && cachedAvatar) {
+        return cachedAvatar;
+    }
     
     let apiUrl = `/app/getAvatar/${avatar_url}`;
     if (cachedHash) {
@@ -34,16 +42,18 @@ async function getAvatar(avatar_url) {
         const response = await fetch(apiUrl);
         
         if (response.status === 304 && cachedAvatar) {
+            localStorage.setItem(storageKey + '_time', Date.now().toString());
             return cachedAvatar;
         } else if (response.ok) {
             const blob = await response.blob();
             const dataUrl = await toBase64(blob);
             
             const newHash = response.headers.get('ETag') || response.headers.get('X-Hash');
-            
+        
             if (newHash) {
                 localStorage.setItem(storageKey, newHash);
                 localStorage.setItem(storageKey + '_data', dataUrl);
+                localStorage.setItem(storageKey + '_time', Date.now().toString());
             }
             
             return dataUrl;

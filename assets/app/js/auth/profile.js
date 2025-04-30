@@ -16,29 +16,36 @@ const checkAuth = async () => {
         }
 
         if (!response.ok) {
-            //window.location.href = `/app/register?link=${window.location.pathname.split('/').pop()}`;
+            window.location.href = `/app/register?link=${window.location.pathname.split('/').pop()}`;
             return false;
         }
 
         profile = await response.json();
-        const { user_id, display_name, username, created_at } = profile.data;
+        const { user_id, display_name, username, created_at, avatar_url } = profile.data;
 
-        const settingsList = document.getElementById('settingsList');
-        settingsList.innerHTML = `
-            <div>
-                <div style="display: flex; align-items: center; gap: 10px">
-                    <div class="avatar-container" onclick="changeAvatar()">
-                        <img src="/app/getAvatar/${user_id}" 
-                             class="avatar" 
-                             style="width: 64px; height: 64px; border-radius: 10px">
-                        <div class="avatar-overlay">Изменить</div>
-                    </div>
-                    <h3>${display_name || username}</h3>
+        const profileElement = document.getElementById('profile');
+        profileElement.innerHTML = `
+            <div style="display: flex; align-items: center; gap: 10px">
+                <div class="avatar-container" onclick="changeAvatar()">
+                    <img src="" 
+                        class="avatar" 
+                        style="width: 64px; height: 64px; border-radius: 10px">
+                    <div class="avatar-overlay">Изменить</div>
                 </div>
-                <p>Создан: ${new Date(created_at).toLocaleDateString()}</p>
+                <h3>${display_name || username}</h3>
             </div>
-            ${settingsList.innerHTML}
-            `;
+            <p>Создан: ${new Date(created_at).toLocaleDateString()}</p>
+        `;
+
+        if (avatar_url) {
+            try {
+                const avatarBase64 = await getAvatar(avatar_url);
+                const img = profileElement.querySelector('.avatar');
+                img.src = avatarBase64; 
+            } catch (error) {
+                console.error('Ошибка загрузки аватара:', error);
+            }
+        }
 
         return true;
     } catch (error) {

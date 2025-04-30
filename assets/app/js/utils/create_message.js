@@ -2,26 +2,21 @@ async function groupMessages() {
     const messagesContainer = document.getElementById('messages-list');
     const messages = Array.from(messagesContainer.querySelectorAll('.content-widget'));
 
-    document.querySelectorAll('.message-group, .message-group-avatar').forEach(el => {
-        if (el.classList.contains('message-group')) {
-            el.replaceWith(...el.childNodes);
-        } else {
-            el.remove(); 
-        }
+    document.querySelectorAll('.message-group').forEach(group => {
+        group.replaceWith(...group.childNodes);
     });
 
     let currentGroup = null;
     let lastSender = null;
     let lastTime = null;
     let lastMsg = null;
-    let lastSenderId = null;
     const GROUP_INTERVAL = 5 * 60 * 1000;
 
     for (const msg of messages) {
         const isOwn = msg.classList.contains('own');
         const sender = isOwn ? 'user' : 'other';
         const senderId = msg.dataset.senderId || msg.getAttribute('data-sender-id') || '0';
-        const avatarUrl = msg.dataset.avatarUrl;
+        // const avatarUrl = msg.dataset.avatarUrl;
 
         const timeText = msg.querySelector('.time').textContent;
         const [hours, mins] = timeText.split(':').map(Number);
@@ -38,30 +33,24 @@ async function groupMessages() {
             currentGroup = document.createElement('div');
             currentGroup.className = `message-group ${isOwn ? 'own' : ''}`;
 
-            const avatar = document.createElement('img');
-            avatar.className = 'message-group-avatar';
-            avatar.alt = senderId;
+            // const avatar = document.createElement('img');
+            // avatar.className = 'message-group-avatar';
+            // avatar.alt = senderId;
 
             msg.before(currentGroup);
-            currentGroup.appendChild(avatar);
             currentGroup.appendChild(msg);
-
-            getAvatar(avatarUrl).then(dataUrl => {
-                if (dataUrl) {
-                    avatar.src = dataUrl;
-                } else {
-                    avatar.src = '/app/getAvatar/default';
-                }
-            }).catch(error => {
-                console.error('Avatar loading error:', error);
-                avatar.src = '/app/getAvatar/default';
-            });
+            // currentGroup.appendChild(avatar); 
+            
+            // getAvatar(avatarUrl).then(dataUrl => {
+            //     avatar.src = dataUrl || '/app/getAvatar/default';
+            // }).catch(() => {
+            //     avatar.src = '/app/getAvatar/default';
+            // });
         }
 
         lastSender = sender;
         lastTime = msgTime;
         lastMsg = msg;
-        lastSenderId = senderId;
     }
 }
 
@@ -77,7 +66,7 @@ function addMessageToChat(data) {
 
     messageElement.className = `content-widget ${data.sender_id === parseInt(profile.data.user_id) ? 'own' : 'other'}`;
     messageElement.dataset.senderId = data.sender_id;
-    messageElement.dataset.avatarUrl = data.avatar_url;
+    messageElement.dataset.avatarUrl = data.avatar_url || `u${data.sender_id}`;
 
     messageElement.innerHTML = `
         <div class="sender">${data.sender}</div>

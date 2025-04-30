@@ -15,34 +15,47 @@ function toggleChatStatus(chatId, isOnline) {
         }
     }
 }
-
 function displayChats(chats) {
     chatsList.innerHTML = '';
-    return chats.map(chat => {
+    
+    chats.forEach(async (chat) => {
         const chatElement = document.createElement('div');
         chatElement.className = 'chat-item';
         chatElement.dataset.chatId = chat.id;
         chatElement.dataset.chatName = chat.name;
+        
         if (chat.dm_user_id) {
             chatElement.dataset.status = chat.status || 'offline';
             chatElement.dataset.userId = chat.dm_user_id;
         }
         
         const lastMessage = chat.last_sender ?
-        `${chat.last_sender}: ${parseContent(chat.last_message)}`.replace(/<[^>]*>/g, '') :
-        'Нет сообщений';
+            `${chat.last_sender}: ${parseContent(chat.last_message)}`.replace(/<[^>]*>/g, '') :
+            'Нет сообщений';
         
         chatElement.innerHTML = `
-        <img src="/app/getAvatar/${chat.dm_user_id || chat.id}" class="avatar" style="width: 48px; height: 48px; border-radius: 10px">
-        <div class="chat-info">
-        <span class="chat-name">${chat.name}</span>
-        <span class="last-message" title="${lastMessage}">${lastMessage}</span>
-        </div>
-        ${chat.dm_user_id ? '<div class="status-indicator status-offline"></div>' : ''}
+            <img src="" class="avatar" style="width: 48px; height: 48px; border-radius: 10px">
+            <div class="chat-info">
+                <span class="chat-name">${chat.name}</span>
+                <span class="last-message" title="${lastMessage}">${lastMessage}</span>
+            </div>
+            ${chat.dm_user_id ? '<div class="status-indicator status-offline"></div>' : ''}
         `;
+        
         chatsList.appendChild(chatElement);
-        return chatElement;
+        
+        if (chat.avatar_url) {
+            try {
+                const avatarBase64 = await getAvatar(chat.avatar_url);
+                const img = chatElement.querySelector('.avatar');
+                img.src = avatarBase64;
+            } catch (error) {
+                console.error('Ошибка загрузки аватара:', error);
+            }
+        }
     });
+    
+    return null;
 }
 
 async function loadChats() {
