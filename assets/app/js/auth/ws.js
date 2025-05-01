@@ -24,6 +24,7 @@ const connect = async () => {
                 retryCount = 0; 
                 retryDelay = 1000;
                 resolve(ws);
+                requestOnlineList();
             },
             
             error: (error) => {
@@ -38,6 +39,7 @@ const connect = async () => {
                     retryDelay *= 2;
                     console.log(`Reconnecting in ${retryDelay}ms...`);
                     setTimeout(connect, retryDelay);
+                    requestOnlineList();
                 }
             }
         };

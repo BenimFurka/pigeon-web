@@ -8,6 +8,7 @@ async function groupMessages() {
 
     let currentGroup = null;
     let lastSender = null;
+    let lastSenderId = null;
     let lastTime = null;
     let lastMsg = null;
     const GROUP_INTERVAL = 5 * 60 * 1000;
@@ -16,6 +17,7 @@ async function groupMessages() {
         const isOwn = msg.classList.contains('own');
         const sender = isOwn ? 'user' : 'other';
         const senderId = msg.dataset.senderId || msg.getAttribute('data-sender-id') || '0';
+
         // const avatarUrl = msg.dataset.avatarUrl;
 
         const timeText = msg.querySelector('.time').textContent;
@@ -24,6 +26,7 @@ async function groupMessages() {
         msgTime.setHours(hours, mins, 0, 0);
 
         const shouldGroup = (sender === lastSender) && 
+                         (senderId === lastSenderId) &&
                          (msgTime - lastTime < GROUP_INTERVAL) &&
                          (messages.indexOf(msg) === messages.indexOf(lastMsg) + 1);
 
@@ -49,6 +52,7 @@ async function groupMessages() {
         }
 
         lastSender = sender;
+        lastSenderId = senderId;
         lastTime = msgTime;
         lastMsg = msg;
     }
