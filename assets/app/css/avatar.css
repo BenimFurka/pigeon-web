@@ -3,7 +3,10 @@
     height: 40px;
     border-radius: 10px;
     object-fit: cover;
+    display: flex;
+    flex-shrink: 0;
 }
+
 .avatar-container { 
     position: relative; 
     cursor: pointer;
