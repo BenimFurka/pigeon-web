@@ -60,7 +60,7 @@ body {
 
 .mobile_left_layout_container {
     background-color: var(--secondary-color);
-    height: calc(100vh - 60px); 
+    height: 100%;
     margin: 0;
     width: 100%; 
     display: flex;
@@ -85,7 +85,7 @@ body {
     background-color: var(--secondary-color);
     margin: 0;
     width: 100%; 
-    height: calc(100vh - 60px); 
+    height: 100%;
     z-index: 0;
     overflow: hidden;
     position: absolute; 
