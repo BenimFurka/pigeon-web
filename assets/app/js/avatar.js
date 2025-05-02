@@ -1,23 +1,33 @@
-async function changeAvatar() {
+async function changeAvatar(avatarUrl) {
     const input = document.createElement('input');
     input.type = 'file';
     input.accept = 'image/*';
     input.onchange = async (e) => {
         const file = e.target.files[0];
+        if (!file) return;
+        
         const base64 = await toBase64(file);
         const response = await fetch('/app/setUAvatar', {
             method: 'POST',
-            
             credentials: 'include',
             headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({ image: base64.split(',')[1] })
         });
-        if (response.ok) window.location.reload();
+        
+        if (response.ok) {
+            const storageKey = `avatar_hash_${btoa(avatarUrl)}`;
+            localStorage.removeItem(storageKey);
+            localStorage.removeItem(storageKey + '_data');
+            localStorage.removeItem(storageKey + '_time');
+            
+            window.location.reload();
+        }
     };
     input.click();
 }
+
 async function getAvatar(avatar_url, cacheMinutes = 5) {
     const storageKey = `avatar_hash_${btoa(avatar_url)}`;
     const cachedHash = localStorage.getItem(storageKey);

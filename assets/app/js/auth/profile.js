@@ -26,7 +26,7 @@ const checkAuth = async () => {
         const profileElement = document.getElementById('profile');
         profileElement.innerHTML = `
             <div style="display: flex; align-items: center; gap: 10px">
-                <div class="avatar-container" onclick="changeAvatar()">
+                <div class="avatar-container" onclick="changeAvatar(profile.data.avatar_url)">
                     <img src="" 
                         class="avatar" 
                         style="width: 64px; height: 64px; border-radius: 10px">
