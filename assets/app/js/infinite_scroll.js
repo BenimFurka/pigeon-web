@@ -1,95 +1,85 @@
+
 let isLoading = false;
 let hasMoreMessages = true;
+let currentOffset = 0;
+const MESSAGE_LIMIT = 50;
 
-async function loadMoreMessages(chatId, limit = 50, offset = 0) {
+async function loadMoreMessages(chatId) {
+    if (isLoading || !hasMoreMessages) return;
+    
+    isLoading = true;
     try {
-        if (!hasMoreMessages) return false;
-        const response = await fetch(`/app/getMessages/${chatId}?limit=${limit}&offset=${offset}`, {
+        const response = await fetch(`/app/getMessages/${chatId}?limit=${MESSAGE_LIMIT}&offset=${currentOffset}`, {
             credentials: 'include',
         });
-        if (!response.ok) return false;
         
-        const messages = await response.json();
-        if (messages.length === 0) return false;
-        if (messages.length < limit) hasMoreMessages = false;
-
-        messages.reverse().forEach(msg => addOldMessageToChat(msg));
-        return true;
+        if (!response.ok) {
+            hasMoreMessages = false;
+            return;
+        }
+        
+        const data = await response.json();
+        if (data.messages.length === 0) {
+            hasMoreMessages = false;
+            return;
+        }
+        
+        data.messages.forEach(msg => addOldMessageToChat(msg));
+        
+        currentOffset += data.messages.length;
+        
+        if (data.messages.length < MESSAGE_LIMIT) {
+            hasMoreMessages = false;
+        }
+    } catch (error) {
+        console.error('Ошибка при загрузке сообщений:', error);
     } finally {
         isLoading = false;
     }
 }
 
 function addOldMessageToChat(data) {
-    const messagesContainer =  document.getElementById('messages-list');
+    const messagesContainer = document.getElementById('messages-list');
     const messageElement = document.createElement('div');
-    messageElement.className = `content-widget ${data.sender_id === parseInt(profile.user_id) ? 'own' : 'other'}`;
+    
+    messageElement.className = `content-widget ${data.sender_id === parseInt(profile.data.user_id) ? 'own' : 'other'}`;
+    messageElement.dataset.senderId = data.sender_id;
+    messageElement.dataset.avatarUrl = data.avatar_url || `u${data.sender_id}`;
 
-    const url = data.content;
-    const urlParts = url.split('/'); 
-    const code = urlParts.length > 5 ? urlParts[5] : null; 
-
-    if (code && code.length === 6 && !isNaN(code)) { 
-        getGroupName(code)
-        .then(groupName => {
-            console.log(groupName);
-            
-            const containerElement = document.createElement('div');
-            containerElement.className = 'container';
-            
-            const groupNameElement = document.createElement('div');
-            groupNameElement.textContent = groupName; 
-            groupNameElement.dataset.chatId = code; 
-            
-            const joinButton = createJoinButton(code); 
-            groupNameElement.appendChild(joinButton);
-            
-            containerElement.appendChild(groupNameElement);
-            
-            messageElement.innerHTML = `
-                <div class="sender">${data.sender}</div>
-                <div class="content">${parseContent(data.content)}</div>
-                <div class="message-footer">
-                    <span class="read-status">${data.is_read ? 'Прочитано' : 'Не прочитано'}</span>
-                    <span class="time">${new Date(data.timestamp).toLocaleTimeString()}</span>
-                </div>`;
-            
-            messageElement.insertBefore(containerElement, messageElement.querySelector('.message-footer'));
-        })
-        .catch(error => {
-            console.error('Ошибка при получении имени группы:', error);
-        });
-
-
-
-    } else {
-        messageElement.innerHTML = `
-            <div class="sender">${data.sender}</div>
-            <div class="content">${parseContent(data.content)}</div>
-            <div class="message-footer">
-                <span class="read-status">${data.is_read ? 'Прочитано' : 'Не прочитано'}</span>
-                <span class="time">${new Date(data.timestamp).toLocaleTimeString()}</span>
-            </div>
-        `;
-    }
-
+    messageElement.innerHTML = `
+        <div class="sender">${data.sender_name || data.sender}</div>
+        <div class="content">${parseContent(data.content)}</div>
+        <div class="message-footer">
+            <span class="time">${new Date(data.timestamp).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</span>
+        </div>
+    `;
+    
     messagesContainer.prepend(messageElement);
+    groupMessages();
 }
 
-
-function setupInfiniteScroll() {
-    const messagesContainer =  document.getElementById('messages-list');
-    messagesContainer.addEventListener('scroll', async () => {
-        if (isLoading) return;
-        
-        if (messagesContainer.scrollTop <= 100) {
-            isLoading = true;
-            await loadMoreMessages(currentChat, 50, messages.length);
+function setupInfiniteScroll(chatId) {
+    const messagesContainer = document.getElementById('messages-list');
+    
+    currentOffset = 0;
+    hasMoreMessages = true;
+    
+    const scrollHandler = async () => {
+        if (messagesContainer.scrollTop < 100 && !isLoading) {
+            await loadMoreMessages(currentChat);
+            
+            const oldScrollHeight = messagesContainer.scrollHeight;
+            setTimeout(() => {
+                messagesContainer.scrollTop = messagesContainer.scrollHeight - oldScrollHeight;
+            }, 0);
         }
-    });
+    };
+    
+    messagesContainer.removeEventListener('scroll', scrollHandler);
+    messagesContainer.addEventListener('scroll', scrollHandler);
 }
 
 function cleanupInfiniteScroll() {
-    const messagesContainer =  document.getElementById('messages-list');
-    messagesContainer.removeEventListener('scroll', loadMoreMessages);
+    const messagesContainer = document.getElementById('messages-list');
+    messagesContainer.removeEventListener('scroll', () => {});
 }

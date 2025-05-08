@@ -4,6 +4,10 @@ const messagesContainer = document.getElementById('messages-list');
 
 sendButton.addEventListener('click', sendMessage);
 sendText.addEventListener('keypress', (e) => {
+    if (window.location.pathname.split('/').pop() == 'app_mobile') {
+        return;
+    }
+    
     if (e.key === 'Enter' && !e.shiftKey) {
         e.preventDefault();
         sendMessage();
@@ -15,6 +19,11 @@ async function sendMessage() {
     if (!currentChat || !sendText.value.trim()) {
         console.log('No chat selected or empty message');
         return;
+    }
+
+    if (currentChatUser) {
+        const targetUserId = currentChat;
+        await createDM(targetUserId);
     }
     
     const content = sendText.value;

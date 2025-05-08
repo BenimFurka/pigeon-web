@@ -1,9 +1,11 @@
 let currentChat = null;
+let currentChatUser = false;
 
 async function loadMessages(chatId, isUserId = false) {
     hasMoreMessages = true;
     cleanupInfiniteScroll();
-    currentChat = chatId;
+    
+    currentChat = parseInt(chatId);
 
     if (isUserId) {
         try {
@@ -36,7 +38,9 @@ async function loadMessages(chatId, isUserId = false) {
 async function loadExistingMessages(chatId) {
     hasMoreMessages = true;
     cleanupInfiniteScroll();
-    currentChat = chatId;
+    
+    currentChat = parseInt(chatId);
+    
     
     const response = await fetch(`${window.location.origin}/app/getMessages/${chatId}`, {
         credentials: 'include',
@@ -68,8 +72,9 @@ async function loadExistingMessages(chatId) {
         });
     });
     
+    currentChatUser = false;
     messagesContainer.scrollTop = messagesContainer.scrollHeight;
-    setupInfiniteScroll();
+    setupInfiniteScroll(currentChat);
 }
 async function createDM(targetId) {
     cleanupInfiniteScroll();
@@ -109,7 +114,8 @@ async function createDM(targetId) {
         
         displayChats(currentChats);
         loadMessages(data.chat_id);
-        
+
+        currentChatUser = false;
         return data.chat_id;
         
     } catch (error) {
@@ -122,6 +128,8 @@ const chatBar = document.getElementById("chat-bar");
 document.addEventListener('click', (e) => {
     const chatItem = e.target.closest('.chat-item');
     if (!chatItem) return;
+
+    currentChatUser = false;
 
     if (window.location.pathname.split('/').pop() == 'app_mobile') {
         const leftLayout = document.getElementById('leftLayout');
@@ -136,6 +144,8 @@ document.addEventListener('click', (e) => {
 document.addEventListener('click', (e) => {
     const searchResult = e.target.closest('.search-result');
     if (!searchResult) return;
+
+    currentChatUser = true;
     
     if (window.location.pathname.split('/').pop() == 'app_mobile') {
         const leftLayout = document.getElementById('leftLayout');
