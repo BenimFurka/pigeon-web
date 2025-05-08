@@ -2,8 +2,8 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pigeon</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Pigeon · Web</title>
     <link rel="stylesheet" href="/assets/app/css/main.css">
 </head>
 <body>
@@ -54,6 +54,14 @@
         </div>
     </div>
 
+    <div id="context-menu" class="hidden-context">
+        <ul>
+            <li>Пункт 1</li>
+            <li>Пункт 2</li>
+            <li>Пункт 3</li>
+        </ul>
+    </div>
+
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     
     <script src="/assets/app/js/utils/create_message.js"></script>
@@ -80,7 +88,7 @@
     <script src="/assets/app/js/theme.js"></script>
     <script src="/assets/app/js/height.js"></script>
     <!--<script src="/assets/app/js/contextmenu.js"></script>-->
-    
+
     <script>
     document.addEventListener('DOMContentLoaded', async () => {
         refreshTokens();
@@ -93,6 +101,7 @@
 
         loadHue();
         loadTheme();
+
     });
     </script>
 </body>
