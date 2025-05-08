@@ -6,13 +6,25 @@ function handleNewMessage(messageData) {
     updateChatList(data);
 
     if (parseInt(currentChat) === data.chat_id) {
+        if (document.visibilityState !== "visible") {
+            try {
+                playNotification(data);
+            } catch (error) {
+                console.error("Ошибка при воспроизведении уведомления:", error);
+            }
+        }
+
         addMessageToChat(data);
         messagesContainer.scrollTo({
             top: messagesContainer.scrollHeight,
             behavior: 'smooth'
         });
     } else {
-        playNotification();
+        try {
+            playNotification(data);
+        } catch (error) {
+            console.error("Ошибка при воспроизведении уведомления:", error);
+        }
     }
 }
 
@@ -42,10 +54,30 @@ function updateChatList(data) {
     }
 }
 
+function createNotification(sender, content, chat_id) {
+    const notification = new Notification(sender, { body: content });
+    notification.onclick = function() {
+        window.focus();
+        loadMessages(chat_id, false);
+    };
+    return notification;
+}
 
+function playNotification(data) {
+    const showNotification = () => {
+        createNotification(data.sender, data.content, data.chat_id);
+    };
 
-
-function playNotification() {
     notificationSound.play()
-    .catch(err => console.error('Ошибка воспроизведения звука:', err));
+        .catch(err => console.error('Ошибка воспроизведения звука:', err));
+
+    if (Notification.permission === "granted") {
+        showNotification();
+    } else if (Notification.permission !== "denied") {
+        Notification.requestPermission().then(permission => {
+            if (permission === "granted") {
+                showNotification();
+            }
+        });
+    }
 }
