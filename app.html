@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pigeon · Web</title>
-    <link rel="stylesheet" href="/assets/app/css/main.css">
+    <link rel="stylesheet" href="assets/app/css/main.css">
 </head>
 <body>
     <div class="left_layout_container" id="leftLayout">
@@ -19,8 +19,8 @@
     </div>
 
     <div class="right_layout_container">
-        <div class="bar" id="chat-bar">
-            Название чата
+        <div class="bar no-center" id="chat-bar-container">
+            <span id="chat-bar">Название чата</span>
         </div>
         
         <div class="list" id="messages-list">
@@ -42,7 +42,7 @@
                 <div id="profile"></div>
 
                 <button onclick="toggleTheme()", class="clickable-text" id="changeThemeButton">Сменить тему</button>
-                <br>Hue: <span id="hue-value">235</span>° 
+                <br>Hue: <span id="hue-value">235</span>°
                 <div class="slider-container">
                     <input type="range" id="hue-slider" min="0" max="360" value="235" oninput="adjustHue()">
                 </div>
@@ -62,33 +62,33 @@
     </div>
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     
-    <script src="/assets/app/js/utils/create_message.js"></script>
-    <script src="/assets/app/js/utils/markdown.js"></script>
-    <script src="/assets/app/js/utils/themes.js"></script>
+    <script src="assets/app/js/utils/create_message.js"></script>
+    <script src="assets/app/js/utils/markdown.js"></script>
+    <script src="assets/app/js/utils/themes.js"></script>
 
 
 
-    <script src="/assets/app/js/auth/auth.js"></script>
-    <script src="/assets/app/js/auth/profile.js"></script>
-    <script src="/assets/app/js/auth/ws.js"></script>
+    <script src="assets/app/js/auth/auth.js"></script>
+    <script src="assets/app/js/auth/profile.js"></script>
+    <script src="assets/app/js/auth/ws.js"></script>
 
-    <script src="/assets/app/js/search.js"></script>
-    <script src="/assets/app/js/chats.js"></script>
-    <script src="/assets/app/js/messages.js"></script>
-    <script src="/assets/app/js/send_message.js"></script>
-    <script src="/assets/app/js/infinite_scroll.js"></script>
+    <script src="assets/app/js/search.js"></script>
+    <script src="assets/app/js/chats.js"></script>
+    <script src="assets/app/js/messages.js"></script>
+    <script src="assets/app/js/send_message.js"></script>
+    <script src="assets/app/js/infinite_scroll.js"></script>
 
 
-    <script src="/assets/app/js/websocket/new_message.js"></script>
-    <script src="/assets/app/js/websocket/online_status.js"></script>
-    <script src="/assets/app/js/websocket/online_list.js"></script>
+    <script src="assets/app/js/websocket/new_message.js"></script>
+    <script src="assets/app/js/websocket/online_status.js"></script>
+    <script src="assets/app/js/websocket/online_list.js"></script>
 
-    <script src="/assets/app/js/textarea.js"></script>
-    <script src="/assets/app/js/avatar.js"></script>
-    <script src="/assets/app/js/settings.js"></script>
-    <script src="/assets/app/js/theme.js"></script>
-    <script src="/assets/app/js/height.js"></script>
-    <!--<script src="/assets/app/js/contextmenu.js"></script>-->
+    <script src="assets/app/js/textarea.js"></script>
+    <script src="assets/app/js/avatar.js"></script>
+    <script src="assets/app/js/settings.js"></script>
+    <script src="assets/app/js/theme.js"></script>
+    <script src="assets/app/js/height.js"></script>
+    <!--<script src="assets/app/js/contextmenu.js"></script>-->
     
     <script>
     document.addEventListener('DOMContentLoaded', async () => {

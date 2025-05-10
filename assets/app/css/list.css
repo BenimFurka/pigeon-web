@@ -11,13 +11,17 @@
     display: flex;    
     position: relative;
     transition: var(--transition);
-    background-color: var(--primary-color);
-    color: #E0E0E0;
+    background-color: var(--glass-color);
+    color: var(--text-color);
     height: 45px;
     margin: 0;
     padding: 10px;
     align-items: center;
     justify-content: space-between; 
+}
+
+#chat-bar-container {
+    border-bottom: 1px solid var(--border-color);   
 }
 
 .bar > * {
