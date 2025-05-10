@@ -34,6 +34,8 @@ function updateCSSVariables(colors) {
         :root {
             --primary-color: ${colors.lightPrimary};
             --secondary-color: ${colors.lightSecondary};
+            --glass-color: ${colors.lightGlass};
+            --border-color: ${colors.lightBorder};
             --text-color: black;
             --hover-color: brightness(1.05);
             --bg-glass: rgba(0, 0, 0, 0.05);
@@ -45,6 +47,8 @@ function updateCSSVariables(colors) {
         .dark-theme {
             --primary-color: ${colors.darkPrimary};
             --secondary-color: ${colors.darkSecondary};
+            --glass-color: ${colors.darkGlass};
+            --border-color: ${colors.darkBorder};
             --text-color: #E0E0E0;
             --hover-color: brightness(0.95);
             --bg-glass: rgba(255, 255, 255, 0.05);
@@ -61,10 +65,14 @@ function generateColorsFromHue(hue) {
     hue = Math.max(0, Math.min(360, hue));
     
     return {
-        darkPrimary: hsvToHex(hue, 0.53, 0.68),    
-        darkSecondary: hsvToHex(hue - 5, 0.33, 0.14), 
-        lightPrimary: hsvToHex(hue, 0.39, 0.82),     
-        lightSecondary: hsvToHex(hue - 1, 0.04, 0.93) 
+        darkPrimary: hsvToHex(hue, 0.53, 0.68),
+        darkSecondary: hsvToHex(hue - 5, 0.33, 0.14),
+        darkGlass: hsvToHex(hue - 5, 0.28, 0.16),
+        darkBorder: hsvToHex(hue - 5, 0.45, 0.22),
+        lightPrimary: hsvToHex(hue, 0.39, 0.82),
+        lightSecondary: hsvToHex(hue - 1, 0.04, 0.93),
+        lightGlass: hsvToHex(hue - 1, 0.03, 0.91),
+        lightBorder: hsvToHex(hue - 1, 0.08, 0.86)
     };
 }
 

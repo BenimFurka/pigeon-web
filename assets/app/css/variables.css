@@ -1,6 +1,8 @@
 :root {
-    --primary-color: #666DCC;
-    --secondary-color: #DADCF2;
+    --primary-color: #8086D1;
+    --secondary-color: #E4E5ED;
+    --glass-color: #E1E2E8;
+    --border-color: #CACCDB;
     --text-color: black;
     --hover-color: brightness(0.90);
     --bg-glass: rgba(0, 0, 0, 0.05);
@@ -8,10 +10,12 @@
 }
 
 .dark-theme {
-    --primary-color: #474FB3;
-    --secondary-color: #12121A;
+    --primary-color: #5159AD;
+    --secondary-color: #181A24;
+    --glass-color: #1D1F29;
+    --border-color: #1F2338;
     --text-color: #E0E0E0;
     --hover-color: brightness(1.1);
     --bg-glass: rgba(255, 255, 255, 0.05);
     --transition: color 0.3s, background-color 0.3s, border-color 0.3s, opacity 0.3s ease;
-}   
+}

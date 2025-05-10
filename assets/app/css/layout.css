@@ -27,10 +27,11 @@ body {
     background-color: var(--secondary-color);
     margin: 0;
     overflow: hidden; 
+    border-left: 1px solid var(--border-color);
 }
 
 .left_layout_container {
-    background-color: var(--secondary-color);
+    background-color: var(--glass-color);
     width: 30%;
     height: 100%;
     margin: 0;
@@ -59,7 +60,7 @@ body {
 }
 
 .mobile_left_layout_container {
-    background-color: var(--secondary-color);
+    background-color: var(--glass-color);
     height: 100%; 
     margin: 0;
     width: 100%; 

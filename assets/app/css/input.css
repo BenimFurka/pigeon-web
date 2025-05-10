@@ -36,7 +36,7 @@ textarea {
     display: flex;
     margin: 0px;
     width: 100%;
-    background-color: var(--second-color);
+    background-color: var(--glass-color);
     transition: var(--transition);
 }
 
