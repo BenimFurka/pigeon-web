@@ -38,6 +38,7 @@ textarea {
     width: 100%;
     background-color: var(--glass-color);
     transition: var(--transition);
+    border-top: 1px solid var(--border-color);
 }
 
 .search_bar:focus, textarea:focus {

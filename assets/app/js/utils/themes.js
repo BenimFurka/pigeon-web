@@ -67,7 +67,7 @@ function generateColorsFromHue(hue) {
     return {
         darkPrimary: hsvToHex(hue, 0.53, 0.68),
         darkSecondary: hsvToHex(hue - 5, 0.33, 0.14),
-        darkGlass: hsvToHex(hue - 5, 0.28, 0.16),
+        darkGlass: hsvToHex(hue - 5, 0.30, 0.15),
         darkBorder: hsvToHex(hue - 5, 0.45, 0.22),
         lightPrimary: hsvToHex(hue, 0.39, 0.82),
         lightSecondary: hsvToHex(hue - 1, 0.04, 0.93),
