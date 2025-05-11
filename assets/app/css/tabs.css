@@ -1,0 +1,25 @@
+.tabs {
+    display: flex;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    overflow: hidden;
+}
+    
+.tab {
+    flex: 1;
+    padding: 12px;
+    text-align: center;
+    cursor: pointer;
+    border-bottom: 2px solid var(--primary-color);
+    color: var(--primary-color);
+    transition: var(--transition);
+}
+
+.tab:hover {
+    background-color: var(--hover-color);
+}
+    
+.tab.active {
+    color: var(--primary-color);
+    background: var(--bg-glass);
+}

@@ -38,12 +38,16 @@
                 Настройки
             </div>
             <div class="list" id="settingsList">
-            
                 <div id="profile"></div>
-
-                <button onclick="toggleTheme()", class="clickable-text" id="changeThemeButton">Сменить тему</button>
-                <br>Hue: <span id="hue-value">235</span>°
-                <div class="slider-container">
+                <label for="themes">Тема</label>
+                <div class="tabs" id="themes">
+                    <div class="tab active" data-tab="0">Тёмная</div>
+                    <div class="tab" data-tab="1">Светлая</div>
+                    <div class="tab" data-tab="2">Системная</div>
+                </div>
+            
+                <label for="hue-container">Hue: <span id="hue-value">235</span>°</label>
+                <div class="slider-container" id="hue-container">
                     <input type="range" id="hue-slider" min="0" max="360" value="235" oninput="adjustHue()">
                 </div>
             </div>
