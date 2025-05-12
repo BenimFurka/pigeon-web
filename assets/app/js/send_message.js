@@ -1,5 +1,5 @@
-const sendButton = document.getElementById('sendButton');
-const sendText = document.getElementById('sendText');
+const sendButton = document.getElementById('send-button');
+const sendText = document.getElementById('send-textarea');
 const messagesContainer = document.getElementById('messages-list');
 
 sendButton.addEventListener('click', sendMessage);

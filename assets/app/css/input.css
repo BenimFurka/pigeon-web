@@ -17,7 +17,7 @@ textarea {
     flex-grow: 1;
 }
 
-.search_bar {
+.search-bar {
     background-color: var(--secondary-color);
     border: 1px solid var(--primary-color);
     position: relative;
@@ -32,7 +32,7 @@ textarea {
     margin: 0 auto; 
 }
 
-.input_container {
+.input-container {
     display: flex;
     margin: 0px;
     width: 100%;
@@ -41,13 +41,13 @@ textarea {
     border-top: 1px solid var(--border-color);
 }
 
-.search_bar:focus, textarea:focus {
+.search-bar:focus, textarea:focus {
     outline: none;
 }
 
-#sendButton {
+#send-button {
     align-self: flex-end;
 }
-#sendText {
+#send-textarea {
     align-self: center;
 }

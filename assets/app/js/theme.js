@@ -3,7 +3,7 @@ const applyTheme = (theme) => {
     tabs.forEach(tab => tab.classList.remove('active'));
     
     document.querySelector(`#themes .tab[data-tab="${theme}"]`).classList.add('active');
-    document.body.classList.remove('dark-theme', 'light-theme');
+    document.body.classList.remove('dark-theme');
     
     if (theme === '0') {
         document.body.classList.add('dark-theme');

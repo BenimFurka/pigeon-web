@@ -132,7 +132,7 @@ document.addEventListener('click', (e) => {
     currentChatUser = false;
 
     if (window.location.pathname.split('/').pop() == 'app_mobile') {
-        const leftLayout = document.getElementById('leftLayout');
+        const leftLayout = document.getElementById('left-layout');
         leftLayout.classList.add('hidden');
     }
     chatBar.innerHTML = chatItem.dataset.chatName;
@@ -148,7 +148,7 @@ document.addEventListener('click', (e) => {
     currentChatUser = true;
     
     if (window.location.pathname.split('/').pop() == 'app_mobile') {
-        const leftLayout = document.getElementById('leftLayout');
+        const leftLayout = document.getElementById('left-layout');
         leftLayout.classList.add('hidden');
     }
     
@@ -166,10 +166,10 @@ document.addEventListener('click', (e) => {
 });
 
 if (window.location.pathname.split('/').pop() == 'app_mobile') {
-    const backRightButton = document.getElementById('backRightButton');
+    const backRightButton = document.getElementById('from-chat-button');
 
     backRightButton.addEventListener('click', function() {
-        const leftLayout = document.getElementById('leftLayout');
+        const leftLayout = document.getElementById('left-layout');
         leftLayout.classList.remove('hidden');
     });
 }

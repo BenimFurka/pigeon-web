@@ -1,7 +1,7 @@
 // зачем этот комментарий. для красоты
 
 function clearSearch() {
-    const searchBar = document.getElementById('search_bar');
+    const searchBar = document.getElementById('search-bar');
     const chatsList = document.getElementById('chats');
     
     searchBar.value = '';
@@ -14,7 +14,7 @@ function clearSearch() {
 }
 
 async function initSearch() {
-    const searchBar = document.getElementById('search_bar');
+    const searchBar = document.getElementById('search-bar');
     const chatsList = document.getElementById('chats');
 
     

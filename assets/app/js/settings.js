@@ -1,7 +1,7 @@
-const buttonToSettings = document.getElementById('buttonToSettings');
-const leftLayout = document.getElementById('leftLayout');
-const settingsLayout = document.getElementById('settingsLayout');
-const backButton = document.getElementById('backButton');
+const buttonToSettings = document.getElementById('to-settings-button');
+const leftLayout = document.getElementById('left-layout');
+const settingsLayout = document.getElementById('settings-layout');
+const backButton = document.getElementById('from-settings-button');
 
 async function initSettings() {
     leftLayout.classList.remove('hidden');

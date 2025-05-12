@@ -1,5 +1,6 @@
 * {
     box-sizing: border-box; 
+    transition: var(--transition);
 }
 
 body {
@@ -19,7 +20,7 @@ body {
 }
 
 
-.right_layout_container {
+.right-layout-container {
     display: flex;
     flex-direction: column;
     width: 70%;
@@ -30,19 +31,19 @@ body {
     border-left: 1px solid var(--border-color);
 }
 
-.left_layout_container {
+.left-layout-container {
     background-color: var(--glass-color);
     width: 30%;
     height: 100%;
     margin: 0;
     display: flex;
-    transition: transform 1s;
+    transition: var(--transition), transform 1s;
     flex-direction: column;
     z-index: 2;
     overflow: hidden;
 }
 
-.left_layout_container.settings {
+.left-layout-container.settings {
     position: absolute;
     inset: 0; 
     width: 30%; 
@@ -52,26 +53,26 @@ body {
     min-height: 0;
 }
 
-.left_layout, .right_layout {
+.left-layout, .right-layout {
     display: flex;
     flex-direction: column;
     height: 100%;
     overflow: hidden; 
 }
 
-.mobile_left_layout_container {
+.mobile-left-layout-container {
     background-color: var(--glass-color);
     height: 100%; 
     margin: 0;
     width: 100%; 
     display: flex;
-    transition: transform 1s;
+    transition: var(--transition), transform 1s;
     flex-direction: column;
     z-index: 1;
     overflow: hidden;
 }
 
-.mobile_left_layout_container.settings {
+.mobile-left-layout-container.settings {
     position: absolute;
     inset: 0;  
     display: flex;
@@ -80,7 +81,7 @@ body {
     min-height: 0;
 }
 
-.mobile_right_layout_container {
+.mobile-right-layout-container {
     display: flex;
     flex-direction: column;
     background-color: var(--secondary-color);

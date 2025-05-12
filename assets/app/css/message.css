@@ -77,6 +77,7 @@
     bottom: 6px;
     border-width: 6px 6px 6px 0;
     border: 6px solid transparent;
+    transition: var(--transition);
 }
 
 .content-widget.own {
