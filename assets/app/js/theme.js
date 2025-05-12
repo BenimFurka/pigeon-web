@@ -7,20 +7,16 @@ const applyTheme = (theme) => {
     
     if (theme === '0') {
         document.body.classList.add('dark-theme');
-        setThemeVariables(true);
         localStorage.setItem('themePreference', 'dark');
     } else if (theme === '1') {
-        document.body.classList.add('light-theme');
-        setThemeVariables(false);
+        document.body.classList.remove('dark-theme');
         localStorage.setItem('themePreference', 'light');
     } else {
         const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
         if (prefersDark) {
             document.body.classList.add('dark-theme');
-            setThemeVariables(true);
         } else {
-            document.body.classList.add('light-theme');
-            setThemeVariables(false);
+            document.body.classList.remove('dark-theme');
         }
         localStorage.setItem('themePreference', 'system');
     }
