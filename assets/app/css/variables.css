@@ -17,5 +17,5 @@
     --text-color: #E0E0E0;
     --hover-color: brightness(1.1);
     --bg-glass: rgba(255, 255, 255, 0.05);
-    --transition: color 0.3s, background-color 0.3s, border-color 0.3s, opacity 0.3s ease;
+    --transition: color 0.3s, background-color 0.3s, border-color 0.3s, opacity 0.3s;
 }

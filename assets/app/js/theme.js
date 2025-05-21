@@ -33,6 +33,7 @@ const loadTheme = () => {
         }
     });
 };
+
 document.querySelectorAll('#themes .tab').forEach(tab => {
     tab.addEventListener('click', () => {
         applyTheme(tab.getAttribute('data-tab'));

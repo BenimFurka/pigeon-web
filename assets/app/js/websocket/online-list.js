@@ -4,6 +4,13 @@ function handleOnlineList(users) {
         if (statusIndicator) {
             statusIndicator.className = 'status-indicator status-offline';
         }
+    
+        if (window.ChatModule && window.ChatModule.toggleChatStatus) {
+            const chatId = chat.dataset.chatId;
+            if (chatId) {
+                window.ChatModule.toggleChatStatus(parseInt(chatId), false);
+            }
+        }
     });
 
     users.forEach(userId => {

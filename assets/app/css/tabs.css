@@ -16,7 +16,7 @@
 }
 
 .tab:hover {
-    background-color: var(--hover-color);
+    backdrop-filter: var(--hover-color);
 }
     
 .tab.active {

@@ -1,0 +1,20 @@
+pre code.hljs {
+    background: var(--glass-color) !important;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    padding: 1em;
+}
+
+a {
+    color: var(--primary-color);
+    transition: var(--transition);
+}
+a:hover {
+    filter: var(--hover-color);
+    text-decoration: none;
+}
+
+
+.content-widget.own a {
+    color: var(--text-color);
+}

@@ -10,23 +10,6 @@
     padding-right: 20px;
 }
 
-.message-group-avatar {
-    position: absolute;
-    bottom: 0px;
-    width: 32px;
-    height: 32px;
-    border-radius: 10px;
-    object-fit: cover;
-}
-
-.message-group:not(.own) .message-group-avatar {
-    left: 0;
-}
-
-.message-group.own .message-group-avatar {
-    right: 0;
-}
-
 .message-group .content-widget {
     margin-bottom: 1px;
     border-radius: 8px !important; 

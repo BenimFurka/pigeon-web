@@ -36,3 +36,20 @@
     transform: translateY(0);
     background: rgba(0,0,0,0.5);
 }
+
+.message-group-avatar {
+    position: absolute;
+    bottom: 0px;
+    width: 32px;
+    height: 32px;
+    border-radius: 10px;
+    object-fit: cover;
+}
+
+.message-group:not(.own) .message-group-avatar {
+    left: 0;
+}
+
+.message-group.own .message-group-avatar {
+    right: 0;
+}

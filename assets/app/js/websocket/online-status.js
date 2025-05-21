@@ -6,4 +6,11 @@ function handleOnlineStatus(userId, isOnline) {
             statusIndicator.className = `status-indicator status-${isOnline ? 'online' : 'offline'}`;
         }   
     }
+    
+    if (window.ChatModule && window.ChatModule.toggleChatStatus) {
+        const chatId = chatElement?.dataset?.chatId;
+        if (chatId) {
+            window.ChatModule.toggleChatStatus(parseInt(chatId), isOnline);
+        }
+    }
 }

@@ -7,6 +7,9 @@
 @import url('list.css');
 @import url('media.css');
 @import url('message.css');
+@import url('markdown.css');
+@import url('loading-screen.css');
 @import url('variables.css');
 @import url('tabs.css');
-@import url('contextmenu.css');
+@import url('context-menu.css');
+@import url('hue-slider.css');

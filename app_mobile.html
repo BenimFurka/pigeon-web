@@ -4,9 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Pigeon · Web</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/github-dark.min.css">
     <link rel="stylesheet" href="assets/app/css/main.css">
 </head>
 <body>
+    <div id="loading-screen">
+        <h1>ЗАГРУЖАЕМСЯ...</h1>
+        <p>Это займёт не так уж и много времени</p>
+        <div class="progress-container">
+            <div id="progress">Загружается скрипт (0%)</div>
+        </div>
+    </div>
+
     <div class="mobile-left-layout-container" id="left-layout">
         <div class="bar">
             <button id="to-settings-button" class="clickable-text">⚙️</button>
@@ -68,47 +77,6 @@
         </ul>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-    
-    <script src="assets/app/js/utils/create_message.js"></script>
-    <script src="assets/app/js/utils/markdown.js"></script>
-    <script src="assets/app/js/utils/themes.js"></script>
-
-    <script src="assets/app/js/websocket/new_message.js"></script>
-    <script src="assets/app/js/websocket/online_status.js"></script>
-    <script src="assets/app/js/websocket/online_list.js"></script>
-
-    <script src="assets/app/js/auth/auth.js"></script>
-    <script src="assets/app/js/auth/profile.js"></script>
-    <script src="assets/app/js/auth/ws.js"></script>
-
-    <script src="assets/app/js/search.js"></script>
-    <script src="assets/app/js/chats.js"></script>
-    <script src="assets/app/js/messages.js"></script>
-    <script src="assets/app/js/send_message.js"></script>
-    <script src="assets/app/js/infinite_scroll.js"></script>
-
-    <script src="assets/app/js/textarea.js"></script>
-    <script src="assets/app/js/avatar.js"></script>
-    <script src="assets/app/js/settings.js"></script>
-    <script src="assets/app/js/theme.js"></script>
-    <script src="assets/app/js/height.js"></script>
-    <!--<script src="assets/app/js/contextmenu.js"></script>-->
-
-    <script>
-    document.addEventListener('DOMContentLoaded', async () => {
-        refreshTokens();
-        checkAuth();
-
-        await connect()
-        await mobileInitSettings();
-        await initSearch();
-        await loadChats();
-
-        loadHue();
-        loadTheme();
-
-    });
-    </script>
+    <script src="assets/app/js/main.js"></script>
 </body>
 </html>

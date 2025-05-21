@@ -62,5 +62,5 @@
 }
 
 .status-offline {
-    background-color: var(--hover-color);
+    filter: var(--hover-color);
 }

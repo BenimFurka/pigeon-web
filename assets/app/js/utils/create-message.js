@@ -64,23 +64,41 @@ function convertTimeToTimestamp(timeStr) {
     return new Date(now.getFullYear(), now.getMonth(), now.getDate(), hours, minutes).getTime();
 }
 
-function addMessageToChat(data) {
+
+function addMessageToChat(data, withGroup = true, prepend = false) {
     const messagesContainer = document.getElementById('messages-list');
     const messageElement = document.createElement('div');
-
-    messageElement.className = `content-widget ${data.sender_id === parseInt(profile.data.user_id) ? 'own' : 'other'}`;
+    
+    const currentUserId = window.profile && profile.data ? parseInt(profile.data.user_id) : 0;
+    
+    messageElement.className = `content-widget ${data.sender_id === currentUserId ? 'own' : 'other'}`;
     messageElement.dataset.senderId = data.sender_id;
     messageElement.dataset.avatarUrl = data.avatar_url || `u${data.sender_id}`;
-
+    
+    const displayName = data.sender_name || data.sender;
+    
     messageElement.innerHTML = `
-        <div class="sender">${data.sender}</div>
-        <div class="content">${parseContent(data.content)}</div>
+        <div class="sender">${displayName}</div>
+        <div class="content">${parseMarkdown(data.content)}</div>
         <div class="message-footer">
             ${data.is_read ? '' : ''}
             <span class="time">${new Date(data.timestamp).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</span>
         </div>
     `;
-
-    messagesContainer.appendChild(messageElement);
-    groupMessages();
+    
+    if (prepend) {
+        if (messagesContainer.firstChild) {
+            messagesContainer.insertBefore(messageElement, messagesContainer.firstChild);
+        } else {
+            messagesContainer.appendChild(messageElement);
+        }
+    } else {
+        messagesContainer.appendChild(messageElement);
+    }
+    
+    if (withGroup && typeof groupMessages === 'function') {
+        groupMessages();
+    }
+    
+    return messageElement;
 }
