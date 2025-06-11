@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Pigeon · Web</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/github-dark.min.css">
-    <link rel="stylesheet" href="assets/app/css/main.css">
+    <link rel="stylesheet" href="/assets/app/css/main.css">
 </head>
 <body>
     <div id="loading-screen">
@@ -57,7 +57,11 @@
     <div class="mobile-right-layout-container">
         <div class="bar no-center" id="chat-bar-container">
             <button id="from-chat-button" class="clickable-text">⬅️</button>
-            <span id="chat-bar">Название чата</span>
+            <img id="chat-bar-avatar" class="avatar" style="display: none; width: 36px; height: 36px; border-radius: 10px" src="" alt="">
+            <div class="chat-bar-text">
+                <span id="chat-bar-name">Название чата</span>
+                <span id="chat-bar-status"></span>
+            </div>
         </div>
         
         <div class="list" id="messages-list">
@@ -71,12 +75,83 @@
 
     <div id="context-menu" class="hidden-context">
         <ul>
-            <li>Пункт 1</li>
-            <li>Пункт 2</li>
-            <li>Пункт 3</li>
         </ul>
     </div>
 
-    <script src="assets/app/js/main.js"></script>
+    <template id="settings-section-profile">
+        <div class="settings-section">
+            <div class="settings-section-header">
+                <button class="back-button">← Назад</button>
+                <h2>Мой профиль</h2>
+            </div>
+            <div class="settings-section-content">
+                <div id="profile"></div>
+                <p class="empty-message">Тут пока пусто</p>
+            </div>
+        </div>
+    </template>
+    
+    <template id="settings-section-appearance">
+        <div class="settings-section">
+            <div class="settings-section-header">
+                <button class="back-button">← Назад</button>
+                <h2>Внешний вид</h2>
+            </div>
+            <div class="settings-section-content">
+                <div class="setting-item">
+                    <label for="themes">Тема</label>
+                    <div class="tabs" id="themes">
+                        <div class="tab" data-tab="0">Тёмная</div>
+                        <div class="tab" data-tab="1">Светлая</div>
+                        <div class="tab" data-tab="2">Системная</div>
+                    </div>
+                </div>
+                <div class="setting-item">
+                    <label for="hue-container">Цветовая схема: <span id="hue-value">235</span>°</label>
+                    <div class="slider-container" id="hue-container">
+                        <input type="range" id="hue-slider" min="0" max="360" value="235" oninput="adjustHue()">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </template>
+    
+    <template id="settings-section-notifications">
+        <div class="settings-section">
+            <div class="settings-section-header">
+                <button class="back-button">← Назад</button>
+                <h2>Звуки и уведомления</h2>
+            </div>
+            <div class="settings-section-content">
+                <div class="setting-item">
+                    <label class="switch">
+                        <input type="checkbox" id="notifications-toggle" checked>
+                        <span class="slider round"></span>
+                    </label>
+                    <label for="notifications-toggle">Включить уведомления</label>
+                </div>
+                <div class="setting-item">
+                    <label class="switch">
+                        <input type="checkbox" id="sounds-toggle" checked>
+                        <span class="slider round"></span>
+                    </label>
+                    <label for="sounds-toggle">Включить звуки</label>
+                </div>
+            </div>
+        </div>
+    </template>
+    
+    <template id="settings-list-item">
+        <div class="settings-section-item">
+            <div class="section-icon"></div>
+            <div class="section-content">
+                <h3></h3>
+            </div>
+            <div class="section-arrow">›</div>
+        </div>
+    </template>
+
+    <script src="/assets/app/js/main.js"></script>
 </body>
 </html>
+
