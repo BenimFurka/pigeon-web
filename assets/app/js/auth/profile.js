@@ -1,58 +1,68 @@
-let profile = null;
+let profile = {
+    data: {
+        user_id: null,
+        username: null,
+        display: null,
+        created_at: null
+    },
+    isLoaded: false
+};
+
+// Экспортируем объект profile в глобальную область видимости
+window.profile = profile;
+
 let isAuthInProgress = false;
+
+let profileLoadedPromise = null;
+let profileLoadedResolve = null;
+
+profileLoadedPromise = new Promise(resolve => {
+    profileLoadedResolve = resolve;
+});
+
+const waitForProfileLoaded = async () => {
+    if (profile.isLoaded) return profile;
+    return profileLoadedPromise;
+};
+
+window.waitForProfileLoaded = waitForProfileLoaded;
 
 const checkAuth = async () => {
     if (isAuthInProgress) return;
     isAuthInProgress = true;
 
     try {
-        const response = await fetch(`${window.location.origin}/app/getProfile`, {
+        const response = await fetch('/api/users', {
             credentials: 'include'
         });
 
         const { status } = response;
         if (status === 401 && await refreshTokens()) {
+            isAuthInProgress = false;
             return checkAuth();
         }
 
         if (!response.ok) {
-            window.location.href = `/app/register?link=${window.location.pathname.split('/').pop()}`;
+            window.location.href = `/register?link=${window.location.pathname.split('/').pop()}`;
+            isAuthInProgress = false;
             return false;
         }
 
-        profile = await response.json();
-        const { user_id, display_name, username, created_at, avatar_url } = profile.data;
-
-        const profileElement = document.getElementById('profile');
-        profileElement.innerHTML = `
-            <div style="display: flex; align-items: center; gap: 10px">
-                <div class="avatar-container" onclick="changeAvatar(profile.data.avatar_url)">
-                    <img src="" 
-                        class="avatar" 
-                        style="width: 64px; height: 64px; border-radius: 10px">
-                    <div class="avatar-overlay">Изменить</div>
-                </div>
-                <h3>${display_name || username}</h3>
-            </div>
-            <p>Создан: ${new Date(created_at).toLocaleDateString()}</p>
-        `;
-
-        if (avatar_url) {
-            try {
-                const avatarBase64 = await getAvatar(avatar_url);
-                const img = profileElement.querySelector('.avatar');
-                img.src = avatarBase64; 
-            } catch (error) {
-                console.error('Ошибка загрузки аватара:', error);
-            }
+        const profileData = await response.json();
+        
+        profile.data = profileData.data;
+        profile.isLoaded = true;
+        
+        if (profileLoadedResolve) {
+            profileLoadedResolve(profile);
         }
 
+        isAuthInProgress = false;
         return true;
     } catch (error) {
-        console.error('Auth check failed:', error);
-        window.location.href = `/app/register?link=${window.location.pathname.split('/').pop()}`;
-        return false;
-    } finally {
+        console.error('[ERROR] Проверка авторизации не удалась:', error);
+        window.location.href = `/register?link=${window.location.pathname.split('/').pop()}`;
         isAuthInProgress = false;
+        return false;
     }
 };

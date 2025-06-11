@@ -1,8 +1,13 @@
 const defaultHue = 235;
 
 function adjustHue() {
-    const currentHue = parseInt(document.getElementById('hue-slider').value);
-    document.getElementById('hue-value').textContent = currentHue;
+    const hueSlider = document.getElementById('hue-slider');
+    const hueValue = document.getElementById('hue-value');
+    
+    if (!hueSlider || !hueValue) return;
+    
+    const currentHue = parseInt(hueSlider.value);
+    hueValue.textContent = currentHue;
 
     localStorage.setItem('hueValue', currentHue);
 
@@ -11,25 +16,33 @@ function adjustHue() {
 }
 
 function loadHue() {
+    const hueSlider = document.getElementById('hue-slider');
+    const hueValue = document.getElementById('hue-value');
+    
+    if (!hueSlider || !hueValue) return;
+    
     const storedHue = localStorage.getItem('hueValue');
-
-    if (storedHue) {
-        document.getElementById('hue-slider').value = storedHue;
-        document.getElementById('hue-value').textContent = storedHue;
-        
-        const colors = generateColorsFromHue(storedHue);
-        updateCSSVariables(colors);
-    } else {
-        document.getElementById('hue-slider').value = defaultHue;
-        document.getElementById('hue-value').textContent = defaultHue;
-
-        const colors = generateColorsFromHue(defaultHue);
-        updateCSSVariables(colors);
-    }
+    const hue = storedHue ? parseInt(storedHue) : defaultHue;
+    
+    hueSlider.value = hue;
+    hueValue.textContent = hue;
+    
+    const colors = generateColorsFromHue(hue);
+    updateCSSVariables(colors);
+    
+    hueSlider.addEventListener('input', adjustHue);
 }
 
-
 function updateCSSVariables(colors) {
+    if (!colors || typeof document === 'undefined') return;
+    
+    let styleElement = document.getElementById('hue-styles');
+    if (!styleElement) {
+        styleElement = document.createElement('style');
+        styleElement.id = 'hue-styles';
+        document.head.appendChild(styleElement);
+    }
+    
     const rootStyles = `
         :root {
             --primary-color: ${colors.lightPrimary};
@@ -55,11 +68,32 @@ function updateCSSVariables(colors) {
             --transition: color 0.3s, background-color 0.3s, border-color 0.3s, opacity 0.3s ease;
         }`
     ;
-    const styleSheet = document.createElement("style");
-    styleSheet.type = "text/css";
-    styleSheet.innerText = rootStyles + darkThemeStyles;
-    document.head.appendChild(styleSheet);
+    
+    styleElement.textContent = rootStyles + darkThemeStyles;
 }
+
+function initializeTheme() {
+    if (window.ThemeManager && window.ThemeManager.loadTheme) {
+        window.ThemeManager.loadTheme();
+    }
+    
+    const storedHue = localStorage.getItem('hueValue');
+    const hue = storedHue ? parseInt(storedHue) : defaultHue;
+    const colors = generateColorsFromHue(hue);
+    updateCSSVariables(colors);
+}
+
+if (document.readyState === 'complete' || document.readyState === 'interactive') {
+    setTimeout(initializeTheme, 1);
+} else {
+    document.addEventListener('DOMContentLoaded', initializeTheme);
+}
+
+window.HueManager = {
+    adjustHue,
+    loadHue,
+    initializeTheme
+};
 
 function generateColorsFromHue(hue) {
     hue = Math.max(0, Math.min(360, hue));

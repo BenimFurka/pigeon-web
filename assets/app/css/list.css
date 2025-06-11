@@ -15,7 +15,6 @@
     color: var(--text-color);
     height: 45px;
     margin: 0;
-    padding: 10px;
     align-items: center;
     justify-content: space-between; 
 }

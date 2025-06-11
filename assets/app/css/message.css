@@ -1,13 +1,11 @@
-/* Временно */
-
 .message-group {
     position: relative;
-    padding-left: 20px; 
+    padding-left: 30px; 
 }
 
 .message-group.own {
     padding-left: 0;
-    padding-right: 20px;
+    padding-right: 30px;
 }
 
 .message-group .content-widget {
@@ -39,7 +37,7 @@
     background-color: var(--bg-glass);
     border-radius: 8px;
     padding: 6px 10px 4px 10px;
-    max-width: 80%;
+    max-width: 60%;
     width: fit-content;
     box-shadow: 0 1px 1px rgba(0,0,0,0.1);
     position: relative;
@@ -122,4 +120,29 @@
 
 .content-widget.own .read-status {
     color: var(--text-color);
+}
+
+.content-widget .reply-widget {
+    backdrop-filter: blur(2px);
+    background-color: rgba(255, 255, 255, 0.08);
+    color: var(--text-color);
+    border-radius: 6px;
+    padding: 5px;
+    font-size: 0.7em;
+    word-wrap: break-word;
+    border-left: 3px solid rgba(255, 255, 255, 0.16);
+    max-width: 400px;
+    height: 3.0em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+    white-space: normal;
+    margin-bottom: 4px;
+    transition: height 0.2s ease;
+}
+
+.reply-sender {
+    font-weight: bold;
 }

@@ -4,7 +4,10 @@
     border-radius: 10px;
     object-fit: cover;
     display: flex;
+    outline: none;
+    border: none;
     flex-shrink: 0;
+    background-color: transparent;
 }
 
 .avatar-container { 
@@ -39,7 +42,7 @@
 
 .message-group-avatar {
     position: absolute;
-    bottom: 0px;
+    bottom: -4px;
     width: 32px;
     height: 32px;
     border-radius: 10px;

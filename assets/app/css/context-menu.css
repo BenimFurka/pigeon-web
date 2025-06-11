@@ -1,8 +1,8 @@
 
 #context-menu {
     position: absolute;
-    background: white;
-    border: 1px solid #ccc;
+    background: var(--glass-color);
+    border: 1px solid var(--border-color);
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     z-index: 1000;
@@ -17,7 +17,7 @@
     width: 0;
     height: 0;
     border: 10px solid transparent;
-    border-right-color: white;
+    border-right-color: var(--glass-color);
     border-left-width: 0;
 }
 
@@ -29,7 +29,7 @@
     width: 0;
     height: 0;
     border: 10px solid transparent;
-    border-left-color: white;
+    border-left-color: var(--glass-color);
     border-right-width: 0;
 }
 
@@ -39,15 +39,16 @@
 
 #context-menu ul {
     list-style: none;
-    padding: 8px;
+    padding: 0px;
     margin: 0;
 }
 
 #context-menu li {
-    padding: 8px 12px;
+    padding: 8px 8px;
+    font-size: 12px;
     cursor: pointer;
 }
 
 #context-menu li:hover {
-    background-color: #f0f0f0;
+    backdrop-filter: var(--hover-color);
 }

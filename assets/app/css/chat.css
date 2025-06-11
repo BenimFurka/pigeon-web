@@ -1,0 +1,38 @@
+.date-separator {
+    text-align: center;
+    margin: 20px 0;
+    position: relative;
+    color: var(--text-secondary);
+    font-size: 0.9em;
+}
+
+.date-separator::before,
+.date-separator::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    width: 30%;
+    height: 1px;
+    background: var(--border-color);
+}
+
+.date-separator::before {
+    left: 0;
+}
+
+.date-separator::after {
+    right: 0;
+} 
+
+.chat-bar-text {
+    display: flex;
+    flex-direction: column;
+    max-width: auto; 
+    overflow: hidden; 
+    line-height: 1.5;
+}
+
+.chat-bar-text span:not(:first-child) {
+    color: var(--primary-color);
+    font-size: 0.8em;
+}

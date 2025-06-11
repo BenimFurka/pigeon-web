@@ -4,10 +4,12 @@ const maxHeight = 120;
 
 const adjustHeight = () => {
     const previousScrollTop = textarea.scrollTop;
-    const newHeight = Math.max(minHeight, Math.min(textarea.scrollHeight, maxHeight));
+    textarea.style.height = '0';
+    const contentHeight = textarea.scrollHeight;
+    const newHeight = Math.max(minHeight, Math.min(contentHeight, maxHeight));
     textarea.style.height = `${newHeight}px`;
     textarea.scrollTop = previousScrollTop;
-    textarea.style.overflowY = textarea.scrollHeight > maxHeight ? 'auto' : 'hidden';
+    textarea.style.overflowY = contentHeight > maxHeight ? 'auto' : 'hidden';
 };
 
 const debouncedAdjustHeight = debounce(adjustHeight, 50);

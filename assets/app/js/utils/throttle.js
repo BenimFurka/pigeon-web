@@ -1,36 +1,22 @@
-
-function throttle(func, limit) {
-    if (typeof limit === 'undefined') limit = 300;
+function throttle(func, wait) {
+    let lastFunc;
+    let lastRan;
     
-    var inThrottle = false;
-    var lastFunc;
-    var lastRan;
-    
-    return function() {
-        var context = this;
-        var args = arguments;
+    return function executedFunction(...args) {
+        const context = this;
         
-        if (!inThrottle) {
+        if (!lastRan) {
             func.apply(context, args);
             lastRan = Date.now();
-            inThrottle = true;
-            
-            setTimeout(function() {
-                inThrottle = false;
-            }, limit);
         } else {
             clearTimeout(lastFunc);
             
             lastFunc = setTimeout(function() {
-                if ((Date.now() - lastRan) >= limit) {
+                if ((Date.now() - lastRan) >= wait) {
                     func.apply(context, args);
                     lastRan = Date.now();
                 }
-            }, Math.max(0, limit - (Date.now() - lastRan)));
+            }, wait - (Date.now() - lastRan));
         }
     };
 }
-
-if (typeof module !== 'undefined' && typeof module.exports !== 'undefined') {
-    module.exports = { throttle: throttle };
-} 
